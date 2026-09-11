@@ -22,10 +22,22 @@ let GenreService = class GenreService {
         return this.genres;
     }
     findOne(id) {
-        return `This action returns a #${id} genre`;
+        const genre = this.genres.find((g) => g.Id == id);
+        if (!genre) {
+            throw new common_1.NotFoundException();
+        }
+        else {
+            return genre;
+        }
     }
     update(id, updateGenreDto) {
-        return `This action updates a #${id} genre`;
+        const genre = this.genres.find((g) => g.Id == id);
+        if (!genre) {
+            throw new common_1.NotFoundException();
+        }
+        else {
+            genre.name = updateGenreDto.name;
+        }
     }
     remove(id) {
         this.genres = this.genres.filter((g) => g.Id != id);

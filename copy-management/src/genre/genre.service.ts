@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
 import { Genre } from './entities/genre.entity';
@@ -21,11 +21,21 @@ export class GenreService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} genre`;
+    const genre = this.genres.find((g) => g.Id == id);
+    if (!genre) {
+      throw new NotFoundException();
+    } else {
+      return genre;
+    }
   }
 
   update(id: number, updateGenreDto: UpdateGenreDto) {
-    return `This action updates a #${id} genre`;
+    const genre = this.genres.find((g) => g.Id == id);
+    if (!genre) {
+      throw new NotFoundException();
+    } else {
+      genre.name = updateGenreDto.name;
+    }
   }
 
   remove(id: number) {
