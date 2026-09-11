@@ -5,24 +5,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var GenreService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenreService = void 0;
 const common_1 = require("@nestjs/common");
 const genre_entity_1 = require("./entities/genre.entity");
 let GenreService = class GenreService {
-    genres = [];
+    static { GenreService_1 = this; }
+    static genres = [];
     create(createGenreDto) {
         const newGenre = new genre_entity_1.Genre();
         newGenre.name = createGenreDto.name;
         newGenre.Id = Math.random();
-        this.genres.push(newGenre);
+        GenreService_1.genres.push(newGenre);
         return newGenre.Id;
     }
     findAll() {
-        return this.genres;
+        return GenreService_1.genres;
     }
     findOne(id) {
-        const genre = this.genres.find((g) => g.Id == id);
+        const genre = GenreService_1.genres.find((g) => g.Id == id);
         if (!genre) {
             throw new common_1.NotFoundException();
         }
@@ -31,7 +33,7 @@ let GenreService = class GenreService {
         }
     }
     update(id, updateGenreDto) {
-        const genre = this.genres.find((g) => g.Id == id);
+        const genre = GenreService_1.genres.find((g) => g.Id == id);
         if (!genre) {
             throw new common_1.NotFoundException();
         }
@@ -40,12 +42,12 @@ let GenreService = class GenreService {
         }
     }
     remove(id) {
-        this.genres = this.genres.filter((g) => g.Id != id);
+        GenreService_1.genres = GenreService_1.genres.filter((g) => g.Id != id);
         return true;
     }
 };
 exports.GenreService = GenreService;
-exports.GenreService = GenreService = __decorate([
+exports.GenreService = GenreService = GenreService_1 = __decorate([
     (0, common_1.Injectable)()
 ], GenreService);
 //# sourceMappingURL=genre.service.js.map

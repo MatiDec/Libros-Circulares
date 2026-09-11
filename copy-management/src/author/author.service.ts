@@ -5,7 +5,7 @@ import { Author } from './entities/author.entity';
 
 @Injectable()
 export class AuthorService {
-  authors: Author[] = [];
+  static authors: Author[] = [];
 
   create(createAuthorDto: CreateAuthorDto) {
     const newAuthor = new Author();
@@ -14,17 +14,17 @@ export class AuthorService {
         newAuthor.nationality = createAuthorDto.nationality;
         newAuthor.residency = createAuthorDto.residency;
         newAuthor.Id = Math.random();
-        this.authors.push(newAuthor);
+        AuthorService.authors.push(newAuthor);
     
         return newAuthor.Id;
   }
 
   findAll() {
-    return this.authors;
+    return AuthorService.authors;
   }
 
   findOne(id: number) {
-    const author = this.authors.find((a) => a.Id == id);
+    const author = AuthorService.authors.find((a) => a.Id == id);
     if (!author) {
       throw new NotFoundException();
     } else {
@@ -33,7 +33,7 @@ export class AuthorService {
   }
 
   update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    const author = this.authors.find((a) => a.Id == id);
+    const author = AuthorService.authors.find((a) => a.Id == id);
     if (!author) {
       throw new NotFoundException();
     } else {

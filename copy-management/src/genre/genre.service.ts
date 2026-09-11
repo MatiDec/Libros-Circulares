@@ -5,23 +5,23 @@ import { Genre } from './entities/genre.entity';
 
 @Injectable()
 export class GenreService {
-  genres: Genre[] = [];
+  static genres: Genre[] = [];
 
   create(createGenreDto: CreateGenreDto) {
     const newGenre = new Genre();
     newGenre.name = createGenreDto.name;
     newGenre.Id = Math.random();
-    this.genres.push(newGenre);
+    GenreService.genres.push(newGenre);
 
     return newGenre.Id;
   }
 
   findAll() {
-    return this.genres;
+    return GenreService.genres;
   }
 
   findOne(id: number) {
-    const genre = this.genres.find((g) => g.Id == id);
+    const genre = GenreService.genres.find((g) => g.Id == id);
     if (!genre) {
       throw new NotFoundException();
     } else {
@@ -30,7 +30,7 @@ export class GenreService {
   }
 
   update(id: number, updateGenreDto: UpdateGenreDto) {
-    const genre = this.genres.find((g) => g.Id == id);
+    const genre = GenreService.genres.find((g) => g.Id == id);
     if (!genre) {
       throw new NotFoundException();
     } else {
@@ -39,7 +39,7 @@ export class GenreService {
   }
 
   remove(id: number) {
-    this.genres = this.genres.filter((g) => g.Id != id);
+    GenreService.genres = GenreService.genres.filter((g) => g.Id != id);
     return true;
   }
 }
