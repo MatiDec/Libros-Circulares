@@ -6,7 +6,7 @@ import { GenreService } from '../genre/genre.service';
 export declare class BookService {
     private readonly genreService;
     private readonly authorService;
-    books: Book[];
+    static books: Book[];
     constructor(genreService: GenreService, authorService: AuthorService);
     create(createBookDto: CreateBookDto): number;
     findAll(): Book[];

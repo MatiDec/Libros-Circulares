@@ -1,1 +1,1 @@
-{"version":3,"file":"create-edition.dto.js","sourceRoot":"","sources":["../../../src/edition/dto/create-edition.dto.ts"],"names":[],"mappings":";;;AAAA,MAAa,gBAAgB;CAAG;AAAhC,4CAAgC"}
+{"version":3,"file":"create-edition.dto.js","sourceRoot":"","sources":["../../../src/edition/dto/create-edition.dto.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IACzB,IAAI,CAAS;IACb,IAAI,CAAO;IACX,SAAS,CAAY;CACxB;AAJD,4CAIC"}

@@ -7,7 +7,7 @@ import { GenreService } from '../genre/genre.service';
 
 @Injectable()
 export class BookService {
-  books: Book[] = [];
+  static books: Book[] = [];
 
   constructor(private readonly genreService: GenreService, private readonly authorService: AuthorService) {}
 
@@ -19,17 +19,17 @@ export class BookService {
     newBook.genre = genre;
     newBook.name = createBookDto.name;
     newBook.Id = Math.random();
-    this.books.push(newBook);
+    BookService.books.push(newBook);
 
     return newBook.Id;
   }
 
   findAll() {
-    return this.books;
+    return BookService.books;
   }
 
   findOne(id: number) {
-    const book = this.books.find((b) => b.Id === id);
+    const book = BookService.books.find((b) => b.Id === id);
     if (!book) {
       throw new NotFoundException();
     } else {
@@ -38,7 +38,7 @@ export class BookService {
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
-    const book = this.books.find((b) => b.Id === id);
+    const book = BookService.books.find((b) => b.Id === id);
     if (!book) {
       throw new NotFoundException();
     } else {

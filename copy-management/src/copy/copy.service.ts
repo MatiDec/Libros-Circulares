@@ -1,26 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCopyDto } from './dto/create-copy.dto';
 import { UpdateCopyDto } from './dto/update-copy.dto';
+import { EditionService } from '../edition/edition.service';
+import { Copy } from './entities/copy.entity';
 
 @Injectable()
 export class CopyService {
+  static copies: Copy[] = [];
+
+  constructor(private readonly editionService: EditionService) {}
+
   create(createCopyDto: CreateCopyDto) {
-    return 'This action adds a new copy';
+    const edition = this.editionService.findOne(createCopyDto.edition.Id);
+    const newCopy = new Copy;
+    newCopy.edition = edition;
+    newCopy.Id = Math.random();
+    newCopy.ownerId = Math.random();//PLACEHOLDER, este se relaciona con otro service
+    CopyService.copies.push(newCopy);
+    return newCopy.Id;
   }
 
   findAll() {
-    return `This action returns all copy`;
+    return CopyService.copies;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} copy`;
+    const copy = CopyService.copies.find((c) => c.Id === id);
+    if (!copy) {
+      throw new NotFoundException();
+    } else {
+      return copy;
+    }
   }
 
   update(id: number, updateCopyDto: UpdateCopyDto) {
-    return `This action updates a #${id} copy`;
+    const copy = this.findOne(id);
+    if (!copy) {
+      throw new NotFoundException();
+    } else {
+      copy.edition = this.editionService.findOne(updateCopyDto.edition.Id);
+      return copy;
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} copy`;
+    const copy = this.findOne(id);
+    if (!copy) {
+      throw new NotFoundException();
+    } else {
+      CopyService.copies = CopyService.copies.filter((c) => c.Id !== id);
+      return true;
+    }
   }
 }

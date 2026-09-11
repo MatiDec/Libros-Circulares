@@ -1,9 +1,11 @@
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
+import { Publisher } from './entities/publisher.entity';
 export declare class PublisherService {
-    create(createPublisherDto: CreatePublisherDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updatePublisherDto: UpdatePublisherDto): string;
-    remove(id: number): string;
+    static publishers: Publisher[];
+    create(createPublisherDto: CreatePublisherDto): number;
+    findAll(): Publisher[];
+    findOne(id: number): Publisher;
+    update(id: number, updatePublisherDto: UpdatePublisherDto): Publisher;
+    remove(id: number): boolean;
 }

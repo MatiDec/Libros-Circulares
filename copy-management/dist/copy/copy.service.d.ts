@@ -1,9 +1,14 @@
 import { CreateCopyDto } from './dto/create-copy.dto';
 import { UpdateCopyDto } from './dto/update-copy.dto';
+import { EditionService } from '../edition/edition.service';
+import { Copy } from './entities/copy.entity';
 export declare class CopyService {
-    create(createCopyDto: CreateCopyDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateCopyDto: UpdateCopyDto): string;
-    remove(id: number): string;
+    private readonly editionService;
+    static copies: Copy[];
+    constructor(editionService: EditionService);
+    create(createCopyDto: CreateCopyDto): number;
+    findAll(): Copy[];
+    findOne(id: number): Copy;
+    update(id: number, updateCopyDto: UpdateCopyDto): Copy;
+    remove(id: number): boolean;
 }

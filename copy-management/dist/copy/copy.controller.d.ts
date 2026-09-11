@@ -4,9 +4,9 @@ import { UpdateCopyDto } from './dto/update-copy.dto';
 export declare class CopyController {
     private readonly copyService;
     constructor(copyService: CopyService);
-    create(createCopyDto: CreateCopyDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateCopyDto: UpdateCopyDto): string;
-    remove(id: string): string;
+    create(createCopyDto: CreateCopyDto): number;
+    findAll(): import("./entities/copy.entity").Copy[];
+    findOne(id: string): import("./entities/copy.entity").Copy;
+    update(id: string, updateCopyDto: UpdateCopyDto): import("./entities/copy.entity").Copy;
+    remove(id: string): boolean;
 }

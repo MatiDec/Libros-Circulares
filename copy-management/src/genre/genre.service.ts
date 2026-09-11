@@ -21,7 +21,7 @@ export class GenreService {
   }
 
   findOne(id: number) {
-    const genre = GenreService.genres.find((g) => g.Id == id);
+    const genre = GenreService.genres.find((g) => g.Id === id);
     if (!genre) {
       throw new NotFoundException();
     } else {
@@ -30,7 +30,7 @@ export class GenreService {
   }
 
   update(id: number, updateGenreDto: UpdateGenreDto) {
-    const genre = GenreService.genres.find((g) => g.Id == id);
+    const genre = GenreService.genres.find((g) => g.Id === id);
     if (!genre) {
       throw new NotFoundException();
     } else {
@@ -39,7 +39,7 @@ export class GenreService {
   }
 
   remove(id: number) {
-    GenreService.genres = GenreService.genres.filter((g) => g.Id != id);
+    GenreService.genres = GenreService.genres.filter((g) => g.Id !== id);
     return true;
   }
 }

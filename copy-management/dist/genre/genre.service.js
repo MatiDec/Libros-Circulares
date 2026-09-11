@@ -24,7 +24,7 @@ let GenreService = class GenreService {
         return GenreService_1.genres;
     }
     findOne(id) {
-        const genre = GenreService_1.genres.find((g) => g.Id == id);
+        const genre = GenreService_1.genres.find((g) => g.Id === id);
         if (!genre) {
             throw new common_1.NotFoundException();
         }
@@ -33,7 +33,7 @@ let GenreService = class GenreService {
         }
     }
     update(id, updateGenreDto) {
-        const genre = GenreService_1.genres.find((g) => g.Id == id);
+        const genre = GenreService_1.genres.find((g) => g.Id === id);
         if (!genre) {
             throw new common_1.NotFoundException();
         }
@@ -42,7 +42,7 @@ let GenreService = class GenreService {
         }
     }
     remove(id) {
-        GenreService_1.genres = GenreService_1.genres.filter((g) => g.Id != id);
+        GenreService_1.genres = GenreService_1.genres.filter((g) => g.Id !== id);
         return true;
     }
 };

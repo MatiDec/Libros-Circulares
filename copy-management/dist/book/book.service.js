@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var BookService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
 const common_1 = require("@nestjs/common");
@@ -15,9 +16,10 @@ const book_entity_1 = require("./entities/book.entity");
 const author_service_1 = require("../author/author.service");
 const genre_service_1 = require("../genre/genre.service");
 let BookService = class BookService {
+    static { BookService_1 = this; }
     genreService;
     authorService;
-    books = [];
+    static books = [];
     constructor(genreService, authorService) {
         this.genreService = genreService;
         this.authorService = authorService;
@@ -30,14 +32,14 @@ let BookService = class BookService {
         newBook.genre = genre;
         newBook.name = createBookDto.name;
         newBook.Id = Math.random();
-        this.books.push(newBook);
+        BookService_1.books.push(newBook);
         return newBook.Id;
     }
     findAll() {
-        return this.books;
+        return BookService_1.books;
     }
     findOne(id) {
-        const book = this.books.find((b) => b.Id === id);
+        const book = BookService_1.books.find((b) => b.Id === id);
         if (!book) {
             throw new common_1.NotFoundException();
         }
@@ -46,7 +48,7 @@ let BookService = class BookService {
         }
     }
     update(id, updateBookDto) {
-        const book = this.books.find((b) => b.Id === id);
+        const book = BookService_1.books.find((b) => b.Id === id);
         if (!book) {
             throw new common_1.NotFoundException();
         }
@@ -61,7 +63,7 @@ let BookService = class BookService {
     }
 };
 exports.BookService = BookService;
-exports.BookService = BookService = __decorate([
+exports.BookService = BookService = BookService_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [genre_service_1.GenreService, author_service_1.AuthorService])
 ], BookService);
